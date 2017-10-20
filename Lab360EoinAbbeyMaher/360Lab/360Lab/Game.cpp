@@ -139,4 +139,5 @@ void Game::setupFaceArray()
 	m_pressedFaceArray[6].setPosition(20, 280);  // Left stick click
 	m_pressedFaceArray[7].setPosition(460, 500); // Right Stick Click
 
+
 }
