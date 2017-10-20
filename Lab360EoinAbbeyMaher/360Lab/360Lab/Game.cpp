@@ -77,7 +77,6 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
-	m_currentButton.setString("Current Button Pressed: " + m_controller.m_currentButton);
 	m_PreviousButton.setString("Previous Button Pressed: " + m_controller.m_previousButton);
 }
 
@@ -88,9 +87,8 @@ void Game::render()
 {
 	m_window.clear(sf::Color::White);
 	m_window.draw(m_controllerSprite);
-	m_window.draw(m_currentButton);
 	m_window.draw(m_PreviousButton);
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < BUTTONS; i++)
 	{
 		if (m_controller.m_textShown[i] == true)
 		{
@@ -119,20 +117,12 @@ void Game::setupSprite()
 
 void Game::setupFaceArray()
 {
-
-	m_currentButton.setFont(m_font);
-	m_currentButton.setFillColor(sf::Color::Black);
-	m_currentButton.setPosition(50, 540);
-	m_currentButton.setCharacterSize(15);
-	m_currentButton.setString("Current Button Pressed: ");
-
 	m_PreviousButton.setFont(m_font);
 	m_PreviousButton.setFillColor(sf::Color::Black);
-	m_PreviousButton.setPosition(350, 540);
+	m_PreviousButton.setPosition(50, 540);
 	m_PreviousButton.setCharacterSize(15);
-	m_currentButton.setString("Previous Button Pressed");
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < BUTTONS; i++)
 	{
 		m_pressedFaceArray[i].setFont(m_font);
 		m_pressedFaceArray[i].setString("Pressed");
@@ -140,8 +130,13 @@ void Game::setupFaceArray()
 		m_pressedFaceArray[i].setCharacterSize(15);
 	}
 
-	m_pressedFaceArray[0].setPosition(660, 255);
-	m_pressedFaceArray[1].setPosition(660, 305);
-	m_pressedFaceArray[2].setPosition(660, 355);
-	m_pressedFaceArray[3].setPosition(660, 405);
+	m_pressedFaceArray[0].setPosition(660, 405); // A
+	m_pressedFaceArray[1].setPosition(660, 355); // B
+	m_pressedFaceArray[2].setPosition(660, 305); // X
+	m_pressedFaceArray[3].setPosition(660, 255); // Y
+	m_pressedFaceArray[4].setPosition(620, 160); // RB
+	m_pressedFaceArray[5].setPosition(60, 160);  // LB
+	m_pressedFaceArray[6].setPosition(20, 280);  // Left stick click
+	m_pressedFaceArray[7].setPosition(460, 500); // Right Stick Click
+
 }

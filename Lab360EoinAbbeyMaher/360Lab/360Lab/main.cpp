@@ -2,7 +2,7 @@
 /// simple game loop for SFML[2.4.2]
 /// 
 /// @author Peter Lowe
-/// @date May 21017
+/// @date May 2017
 /// </summary>
 
 #ifdef _DEBUG 

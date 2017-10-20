@@ -1,9 +1,11 @@
-// author Peter Lowe
+//Author Eoin Abbey-Maher
 #ifndef GAME
 #define GAME
 
 #include <SFML/Graphics.hpp>
 #include "Xbox360Controller.h"
+
+
 
 class Game
 {
@@ -28,9 +30,8 @@ private:
 	sf::Texture m_controllerTexture;
 	sf::Sprite m_controllerSprite;
 	sf::Font m_font;
-	sf::Text m_pressedFaceArray[4];
+	sf::Text m_pressedFaceArray[BUTTONS];
 
-	sf::Text m_currentButton;
 	sf::Text m_PreviousButton;
 
 	bool m_exitGame; // control exiting game
