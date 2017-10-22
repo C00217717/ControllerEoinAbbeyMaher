@@ -8,7 +8,7 @@ Game::Game() :
 	m_window{ sf::VideoMode{ 800, 600, 32 }, "SFML Game" },
 	m_exitGame{false} //when true game will exit
 {
-	if (m_controller.isConnected())
+	if (m_controller.connect())
 	{
 		std::cout << "controller Is Connected" << std::endl;
 	}
@@ -45,11 +45,7 @@ void Game::run()
 		render(); // as many as possible
 	}
 }
-/// <summary>
-/// handle user and system events/ input
-/// get key presses/ mouse moves etc. from OS
-/// and user :: Don't do game update here
-/// </summary>
+
 void Game::processEvents()
 {
 	sf::Event event;
@@ -66,10 +62,6 @@ void Game::processEvents()
 	}
 }
 
-/// <summary>
-/// Update the game world
-/// </summary>
-/// <param name="t_deltaTime">time interval per frame</param>
 void Game::update(sf::Time t_deltaTime)
 {
 	m_controller.update();
@@ -78,11 +70,13 @@ void Game::update(sf::Time t_deltaTime)
 		m_window.close();
 	}
 	m_PreviousButton.setString("Previous Button Pressed: " + m_controller.m_previousButton);
+	m_pressedFaceArray[12].setString(std::to_string(m_controller.m_currentState.LTrigger));
+	m_pressedFaceArray[13].setString(std::to_string(m_controller.m_currentState.RTrigger));
+	m_pressedFaceArray[14].setString(std::to_string(m_controller.m_currentState.RightThumbStick.x) + " , " + std::to_string(m_controller.m_currentState.RightThumbStick.y));
+	m_pressedFaceArray[15].setString(std::to_string(m_controller.m_currentState.LeftThumbStick.x) + " , " + std::to_string(m_controller.m_currentState.LeftThumbStick.y));
+
 }
 
-/// <summary>
-/// draw the frame and then switch bufers
-/// </summary>
 void Game::render()
 {
 	m_window.clear(sf::Color::White);
@@ -99,9 +93,6 @@ void Game::render()
 }
 
 
-/// <summary>
-/// load the texture and setup the sprite for the logo
-/// </summary>
 void Game::setupSprite()
 {
 	if (!m_controllerTexture.loadFromFile("ASSETS\\IMAGES\\Controller.jpg"))
@@ -119,7 +110,7 @@ void Game::setupFaceArray()
 {
 	m_PreviousButton.setFont(m_font);
 	m_PreviousButton.setFillColor(sf::Color::Black);
-	m_PreviousButton.setPosition(50, 540);
+	m_PreviousButton.setPosition(50, 580);
 	m_PreviousButton.setCharacterSize(15);
 
 	for (int i = 0; i < BUTTONS; i++)
@@ -138,6 +129,13 @@ void Game::setupFaceArray()
 	m_pressedFaceArray[5].setPosition(60, 160);  // LB
 	m_pressedFaceArray[6].setPosition(20, 280);  // Left stick click
 	m_pressedFaceArray[7].setPosition(460, 500); // Right Stick Click
-
+	m_pressedFaceArray[8].setPosition(330, 490); //Dpad Right
+	m_pressedFaceArray[9].setPosition(210, 490); //Dpad Left
+	m_pressedFaceArray[10].setPosition(280, 450); //Dpad UP
+	m_pressedFaceArray[11].setPosition(280, 530); //Dpad Down
+	m_pressedFaceArray[12].setPosition(200, 80); //Left Trigger;
+	m_pressedFaceArray[13].setPosition(500, 80); //Right Trigger ;
+	m_pressedFaceArray[14].setPosition(460, 500); //Right Stick Coords
+	m_pressedFaceArray[15].setPosition(10, 220); //Left Stick Coords
 
 }

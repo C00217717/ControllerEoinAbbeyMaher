@@ -12,9 +12,6 @@ class Game
 public:
 	Game();
 	~Game();
-	/// <summary>
-	/// main method for game
-	/// </summary>
 	void run();
 
 private:

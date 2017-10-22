@@ -1,9 +1,3 @@
-/// <summary>
-/// simple game loop for SFML[2.4.2]
-/// 
-/// @author Peter Lowe
-/// @date May 2017
-/// </summary>
 
 #ifdef _DEBUG 
 #pragma comment(lib,"sfml-graphics-d.lib") 
@@ -21,11 +15,6 @@
 
 
 #include "Game.h"
-
-/// <summary>
-/// main entry point
-/// </summary>
-/// <returns>true</returns>
 int main()
 {
 	Game game;
