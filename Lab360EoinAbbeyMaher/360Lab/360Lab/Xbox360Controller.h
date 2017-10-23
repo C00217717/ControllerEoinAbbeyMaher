@@ -4,7 +4,7 @@
 #include <SFML\Graphics.hpp>
 #include <iostream>
 
-int const BUTTONS{ 19 };
+int const BUTTONS{ 18 };
 
 struct GamePadState
 {
@@ -45,12 +45,15 @@ public:
 
 	bool m_textShown[BUTTONS];
 
+	bool Quit;
+
 	void Xbox360Controller::update();
 
 	void buttonCheck();
 
 private:
-	const int dpadTreshold = 50;
+	const int dpadTreshold{ 50 };
+	const int thumbstickThreshold{ 15 };
 
 };
 

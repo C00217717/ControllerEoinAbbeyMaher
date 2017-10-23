@@ -135,6 +135,27 @@ void Xbox360Controller::buttonCheck()
 		m_currentState.LB = false;
 	}
 
+	if (sf::Joystick::isButtonPressed(sf_Joystick_Index, 6)) //Back;
+	{
+		m_currentState.Back = true;
+	}
+	else
+	{
+		m_currentState.Back = false;
+	}
+
+	if (sf::Joystick::isButtonPressed(sf_Joystick_Index, 7)) //Start
+	{
+		m_currentState.Start = true;
+		m_textShown[16] = true;
+	}
+	else
+	{
+		m_currentState.Start = false;
+	}
+
+
+
 	if (sf::Joystick::isButtonPressed(sf_Joystick_Index, 8)) //left thumb click
 	{
 		m_currentState.LeftThumbStickClick = true;
@@ -209,7 +230,6 @@ void Xbox360Controller::buttonCheck()
 	if (sf::Joystick::getAxisPosition(sf_Joystick_Index, sf::Joystick::Axis::Z) < (dpadTreshold *-1)) //Right Trigger
 	{
 		m_currentState.RTrigger = sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::Z);
-		
 		m_textShown[13] = true;
 	}
 	else
@@ -217,8 +237,10 @@ void Xbox360Controller::buttonCheck()
 		m_currentState.RTrigger = false;	
 	}
 
-	if (sf::Joystick::getAxisPosition(sf_Joystick_Index, sf::Joystick::Axis::U) > dpadTreshold || sf::Joystick::getAxisPosition(sf_Joystick_Index, sf::Joystick::Axis::U) < (dpadTreshold * -1)
-		|| sf::Joystick::getAxisPosition(sf_Joystick_Index,sf::Joystick::Axis::R) > dpadTreshold || sf::Joystick::getAxisPosition(sf_Joystick_Index,sf::Joystick::Axis::R) < (dpadTreshold * -1)) //Right Thumb Stick move
+	
+
+	if (sf::Joystick::getAxisPosition(sf_Joystick_Index, sf::Joystick::Axis::U) > thumbstickThreshold || sf::Joystick::getAxisPosition(sf_Joystick_Index, sf::Joystick::Axis::U) < (thumbstickThreshold * -1)
+		|| sf::Joystick::getAxisPosition(sf_Joystick_Index,sf::Joystick::Axis::R) > thumbstickThreshold || sf::Joystick::getAxisPosition(sf_Joystick_Index,sf::Joystick::Axis::R) < (thumbstickThreshold * -1)) //Right Thumb Stick move
 	{
 		m_currentState.RightThumbStick.x = sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::U);
 		m_currentState.RightThumbStick.y = sf::Joystick::getAxisPosition(0, sf::Joystick::Axis::R);
@@ -230,8 +252,8 @@ void Xbox360Controller::buttonCheck()
 		m_textShown[14] = false;
 	}
 
-	if (sf::Joystick::getAxisPosition(sf_Joystick_Index, sf::Joystick::Axis::X) > dpadTreshold || sf::Joystick::getAxisPosition(sf_Joystick_Index,sf::Joystick::Axis::X) < (dpadTreshold * -1)
-		|| sf::Joystick::getAxisPosition(sf_Joystick_Index,sf::Joystick::Axis::Y ) > dpadTreshold || sf::Joystick::getAxisPosition(sf_Joystick_Index,sf::Joystick::Axis::Y) < (dpadTreshold * -1)) //Left Thumb stick move
+	if (sf::Joystick::getAxisPosition(sf_Joystick_Index, sf::Joystick::Axis::X) > 15 || sf::Joystick::getAxisPosition(sf_Joystick_Index,sf::Joystick::Axis::X) < -15
+		|| sf::Joystick::getAxisPosition(sf_Joystick_Index,sf::Joystick::Axis::Y ) > 15 || sf::Joystick::getAxisPosition(sf_Joystick_Index,sf::Joystick::Axis::Y) < -15) //Left Thumb stick move
 	{
 		m_currentState.LeftThumbStick.x = sf::Joystick::getAxisPosition(sf_Joystick_Index, sf::Joystick::Axis::X);
 		m_currentState.LeftThumbStick.y = sf::Joystick::getAxisPosition(sf_Joystick_Index, sf::Joystick::Axis::Y);

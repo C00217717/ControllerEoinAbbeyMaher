@@ -29,7 +29,8 @@ private:
 	sf::Font m_font;
 	sf::Text m_pressedFaceArray[BUTTONS];
 
-	sf::Text m_PreviousButton;
+	sf::Text m_previousButton;
+	sf::Text m_controllerNumber;
 
 	bool m_exitGame; // control exiting game
 

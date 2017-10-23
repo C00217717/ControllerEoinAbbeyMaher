@@ -69,19 +69,24 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
-	m_PreviousButton.setString("Previous Button Pressed: " + m_controller.m_previousButton);
+	m_previousButton.setString("Previous Button Pressed: " + m_controller.m_previousButton);
 	m_pressedFaceArray[12].setString(std::to_string(m_controller.m_currentState.LTrigger));
-	m_pressedFaceArray[13].setString(std::to_string(m_controller.m_currentState.RTrigger));
+	m_pressedFaceArray[13].setString(std::to_string(m_controller.m_currentState.RTrigger * -1));
 	m_pressedFaceArray[14].setString(std::to_string(m_controller.m_currentState.RightThumbStick.x) + " , " + std::to_string(m_controller.m_currentState.RightThumbStick.y));
 	m_pressedFaceArray[15].setString(std::to_string(m_controller.m_currentState.LeftThumbStick.x) + " , " + std::to_string(m_controller.m_currentState.LeftThumbStick.y));
 
+	if (m_controller.m_currentState.Back)
+	{
+		m_window.close();
+	}
 }
 
 void Game::render()
 {
 	m_window.clear(sf::Color::White);
 	m_window.draw(m_controllerSprite);
-	m_window.draw(m_PreviousButton);
+	m_window.draw(m_previousButton);
+	m_window.draw(m_controllerNumber);
 	for (int i = 0; i < BUTTONS; i++)
 	{
 		if (m_controller.m_textShown[i] == true)
@@ -108,16 +113,22 @@ void Game::setupSprite()
 
 void Game::setupFaceArray()
 {
-	m_PreviousButton.setFont(m_font);
-	m_PreviousButton.setFillColor(sf::Color::Black);
-	m_PreviousButton.setPosition(50, 580);
-	m_PreviousButton.setCharacterSize(15);
+	m_previousButton.setFont(m_font);
+	m_previousButton.setColor(sf::Color::Black);
+	m_previousButton.setPosition(50, 580);
+	m_previousButton.setCharacterSize(15);
+
+	m_controllerNumber.setFont(m_font);
+	m_controllerNumber.setString("Controller Number " + std::to_string(m_controller.sf_Joystick_Index));
+	m_controllerNumber.setPosition(200, 10);
+	m_controllerNumber.setColor(sf::Color::Black);
+	m_controllerNumber.setCharacterSize(15);
 
 	for (int i = 0; i < BUTTONS; i++)
 	{
 		m_pressedFaceArray[i].setFont(m_font);
 		m_pressedFaceArray[i].setString("Pressed");
-		m_pressedFaceArray[i].setFillColor(sf::Color::Blue);
+		m_pressedFaceArray[i].setColor(sf::Color::Black);
 		m_pressedFaceArray[i].setCharacterSize(15);
 	}
 
@@ -137,5 +148,7 @@ void Game::setupFaceArray()
 	m_pressedFaceArray[13].setPosition(500, 80); //Right Trigger ;
 	m_pressedFaceArray[14].setPosition(460, 500); //Right Stick Coords
 	m_pressedFaceArray[15].setPosition(10, 220); //Left Stick Coords
+	m_pressedFaceArray[16].setPosition(660, 470); //Start
 
+	
 }
